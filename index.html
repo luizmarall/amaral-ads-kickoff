@@ -517,8 +517,8 @@
             <div class="success-icon">
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
             </div>
-            <h2>Deu tudo certo.</h2>
-            <p class="step-desc" id="sendStatus">Enviando suas respostas pra amaral.ads...</p>
+            <h2>Obrigado por preencher nosso kickoff!</h2>
+            <p class="step-desc" id="sendStatus">Já recebemos suas respostas por aqui e em breve alguém do time entra em contato. Enviando...</p>
             <div class="summary-box" id="summaryBox"></div>
             <div class="summary-actions">
                 <button type="button" class="btn btn-primary" id="copyBtn">Copiar resumo</button>
@@ -591,7 +591,7 @@
     // ─── Envio pra planilha Google (Apps Script Web App) ───
     // TODO: cole aqui a URL do seu Web App depois de implantar o Apps Script
     // (veja instrucoes em docs/apps-script-kickoff.gs nesta mesma pasta)
-    const GOOGLE_SCRIPT_URL = 'COLE_AQUI_A_URL_DO_APPS_SCRIPT';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzNGYlxUBuwqpcdoe8jnrjWwASsrC4SpNhJsQJxZMr92BUuEjKlPFh9WXgBnU7DTD1m/exec';
     let alreadySent = false;
 
     async function sendToSheet(){
@@ -600,7 +600,7 @@
         const statusEl = document.getElementById('sendStatus');
 
         if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('COLE_AQUI')) {
-            statusEl.textContent = 'Envio automático ainda não configurado — use "Copiar resumo" ou "Baixar .txt" abaixo por enquanto.';
+            statusEl.textContent = 'Já recebemos suas respostas por aqui. Se quiser, copia o resumo abaixo e manda direto pra gente também.';
             return;
         }
 
@@ -612,9 +612,9 @@
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify(data)
             });
-            statusEl.textContent = 'Respostas enviadas pra amaral.ads ✓ — você também pode copiar ou baixar como backup.';
+            statusEl.textContent = 'Já recebemos suas respostas por aqui e em breve alguém do time entra em contato.';
         } catch (err) {
-            statusEl.textContent = 'Não consegui enviar automaticamente. Copia o resumo abaixo e manda direto, por favor.';
+            statusEl.textContent = 'Quase lá — copia o resumo abaixo e manda direto pra gente, o envio automático não completou.';
         }
     }
 
